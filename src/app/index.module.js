@@ -2,6 +2,9 @@
   'use strict';
 
   angular
-    .module('sbApp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ngRoute', 'ui.bootstrap', 'toastr', 'datatables']);
+    .module('sbApp',
+        ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
+          'ngMessages', 'ngAria', 'ngResource', 'ngRoute', 'ui.bootstrap',
+            'toastr', 'datatables', 'datatables.bootstrap']);
 
 })();
