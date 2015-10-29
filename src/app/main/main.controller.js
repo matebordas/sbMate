@@ -22,6 +22,101 @@
                   "size":52802455,
                   "type":"txt",
                   "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
+              }, {
+                  "date":"2012-10-13",
+                  "size":52802455,
+                  "type":"txt",
+                  "filename":"labore minim.ppt"
               },
               {
                   "date": "2012-12-16",
@@ -36,8 +131,13 @@
       vm.dtOptions = DTOptionsBuilder
           //.fromSource(          )
           .fromFnPromise(getTableData())
-          // Add Bootstrap compatibility
-         .withBootstrap();
+          .withFixedHeader({
+              bottom: true
+          })
+          .withOption('bFilter', false)
+          .withOption('bLengthChange', false)
+          .withDisplayLength(20)
+          .withBootstrap();
 
       vm.dtColumns = [
           DTColumnBuilder.newColumn('date').withTitle('date'),
@@ -46,26 +146,5 @@
           DTColumnBuilder.newColumn('filename').withTitle('filename')
       ];
 
-   /* activate();
-
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
     }
-
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
-
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
-    }*/
-  }
 })();
