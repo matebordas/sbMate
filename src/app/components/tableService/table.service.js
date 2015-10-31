@@ -17,6 +17,7 @@
         this.getIndexOfItem = getIndexOfItem;
         this.chnageTablePage = chnageTablePage;
         this.updateTableWithNewDataSet = updateTableWithNewDataSet;
+        this.sortFilesBy = sortFilesBy;
 
         function getNumberOfPages(dataSet) {
             var pagesNumber = parseInt(dataSet.length / stepSize);
@@ -102,7 +103,7 @@
             if(table.sortedBy !== attribute) {
 
                 table.sortedBy = attribute;
-                table.sortOrder = "asc"
+                table.sortOrder = "asc";
                 ascSortList(table.allFiles, attribute);
 
             } else if(table.sortedBy === attribute) {
@@ -119,26 +120,33 @@
 
         function ascSortList(list, attribute) {
             list.sort(function(a, b) {
-                if (a[attribute].toLowerCase() < b[attribute].toLowerCase()) {
-                    return -1;
+                if(isNaN(a[attribute]) && isNaN(b[attribute])) {
+                    if (a[attribute].toLowerCase() < b[attribute].toLowerCase()) {
+                        return -1;
+                    }
+                    if (a[attribute].toLowerCase() > b[attribute].toLowerCase()) {
+                        return 1;
+                    }
+                    return 0;
+                } else {
+                    return a[attribute] - b[attribute];
                 }
-                if (a[attribute].toLowerCase() > b[attribute].toLowerCase()) {
-                    return 1;
-                }
-                return 0;
             });
         }
 
-
         function descSortList(list, attribute) {
             list.sort(function(a, b) {
-                if (b[attribute].toLowerCase() < a[attribute].toLowerCase()) {
-                    return -1;
+                if(isNaN(a[attribute]) && isNaN(b[attribute])) {
+                    if (b[attribute].toLowerCase() < a[attribute].toLowerCase()) {
+                        return -1;
+                    }
+                    if (b[attribute].toLowerCase() > a[attribute].toLowerCase()) {
+                        return 1;
+                    }
+                    return 0;
+                } else {
+                    return b[attribute] - a[attribute];
                 }
-                if (b[attribute].toLowerCase() > a[attribute].toLowerCase()) {
-                    return 1;
-                }
-                return 0;
             });
         }
     }

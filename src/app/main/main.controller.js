@@ -31,9 +31,9 @@
           position: 'absolute'
       };
 
-      /*vm.sortBy = function(attribute) {
-
-      };*/
+      vm.sortBy = function(attribute) {
+          tableService.sortFilesBy(vm.table, attribute)
+      };
 
       fileListService.getListOfFiles().then(function (data) {
           $timeout(tableService.updateTableWithNewDataSet(vm.table, data), 0);  //Put this in the event queue with timeout

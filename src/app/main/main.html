@@ -16,29 +16,35 @@
         <thead class="fixedHeader">
             <tr>
                 <th>
-                    Index
+                    Select
                 </th>
 
                 <th>File Name
-                    <a href="#/" ng-click="">
+                    <a href="#/" ng-click="mainCtrl.sortBy('filename')">
                         <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
                         </span>
                     </a>
                 </th>
 
                 <th>Type
-                     <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
-                    </span>
+                    <a href="#/" ng-click="mainCtrl.sortBy('type')">
+                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        </span>
+                    </a>
                 </th>
 
                 <th>Date
-                     <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
-                    </span>
+                    <a href="#/" ng-click="mainCtrl.sortBy('date')">
+                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        </span>
+                    </a>
                 </th>
 
                 <th>Size
-                     <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
-                    </span>
+                    <a href="#/" ng-click="mainCtrl.sortBy('size')">
+                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        </span>
+                    </a>
                 </th>
             </tr>
         </thead>
