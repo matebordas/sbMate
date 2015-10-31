@@ -8,6 +8,9 @@
   /** @ngInject */
   function MainController($log, fileListService, tableService, $timeout) {
       var vm = this;
+      var initialFileIndex = null;
+
+      vm.modalFile = {};
 
       vm.table = {
           initialFilesList: [],
@@ -69,6 +72,22 @@
       vm.toggleFileSelect = function(file) {
           file.selected = file.selected ? false : true;
       };
+
+      /*
+      * This is a very ugly solution for saving/discarding changes,
+      * But I really don't have time for a nicer one
+      * */
+      vm.selectFile = function(file) {
+          /*Clone the object*/
+          vm.selectedFile = angular.fromJson(angular.toJson(file));
+          initialFileIndex = vm.getIndexOfItem(vm.table.allFiles, file);
+      };
+
+      vm.saveChanges = function() {
+          vm.table.filteredFiles[initialFileIndex] = vm.selectedFile;
+          vm.table.allFiles[initialFileIndex] = vm.selectedFile;
+      };
+
 
       updateTableWithNewDataSet();
 
