@@ -21,28 +21,48 @@
 
                 <th>File Name
                     <a href="#/" ng-click="mainCtrl.sortBy('filename')">
-                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        <span ng-class="{
+                                    'glyphicon glyphicon-sort glyphicon-align-left': mainCtrl.table.sortedBy !== 'filename',
+                                    'glyphicon glyphicon-sort-by-attributes glyphicon-align-left': mainCtrl.table.sortedBy === 'filename' && mainCtrl.table.sortOrder === 'asc',
+                                    'glyphicon glyphicon-sort-by-attributes-alt glyphicon-align-left': mainCtrl.table.sortedBy === 'filename' && mainCtrl.table.sortOrder === 'desc'
+                              }"
+                              aria-hidden="true">
                         </span>
                     </a>
                 </th>
 
                 <th>Type
                     <a href="#/" ng-click="mainCtrl.sortBy('type')">
-                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        <span ng-class="{
+                                    'glyphicon glyphicon-sort glyphicon-align-left': mainCtrl.table.sortedBy !== 'type',
+                                    'glyphicon glyphicon-sort-by-attributes glyphicon-align-left': mainCtrl.table.sortedBy === 'type' && mainCtrl.table.sortOrder === 'asc',
+                                    'glyphicon glyphicon-sort-by-attributes-alt glyphicon-align-left': mainCtrl.table.sortedBy === 'type' && mainCtrl.table.sortOrder === 'desc'
+                              }"
+                              aria-hidden="true">
                         </span>
                     </a>
                 </th>
 
                 <th>Date
                     <a href="#/" ng-click="mainCtrl.sortBy('date')">
-                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        <span ng-class="{
+                                    'glyphicon glyphicon-sort glyphicon-align-left': mainCtrl.table.sortedBy !== 'date',
+                                    'glyphicon glyphicon-sort-by-attributes glyphicon-align-left': mainCtrl.table.sortedBy === 'date' && mainCtrl.table.sortOrder === 'asc',
+                                    'glyphicon glyphicon-sort-by-attributes-alt glyphicon-align-left': mainCtrl.table.sortedBy === 'date' && mainCtrl.table.sortOrder === 'desc'
+                              }"
+                              aria-hidden="true">
                         </span>
                     </a>
                 </th>
 
                 <th>Size
                     <a href="#/" ng-click="mainCtrl.sortBy('size')">
-                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        <span  ng-class="{
+                                    'glyphicon glyphicon-sort glyphicon-align-left': mainCtrl.table.sortedBy !== 'size',
+                                    'glyphicon glyphicon-sort-by-attributes glyphicon-align-left': mainCtrl.table.sortedBy === 'size' && mainCtrl.table.sortOrder === 'asc',
+                                    'glyphicon glyphicon-sort-by-attributes-alt glyphicon-align-left': mainCtrl.table.sortedBy === 'size' && mainCtrl.table.sortOrder === 'desc'
+                              }"
+                              aria-hidden="true">
                         </span>
                     </a>
                 </th>
