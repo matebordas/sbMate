@@ -137,7 +137,7 @@
         }
 
         function groupByAttribute(table, attribute) {
-            var attributeGroupList = [];
+            var goupedFileList = {};
             var allAttributesList = [];
 
             angular.forEach(table.allFiles, function(file) {
@@ -145,7 +145,15 @@
             }, allAttributesList);
 
             var attributeGroupList = arrayUtil.filterUniqueItems(allAttributesList);
-            console.log(attributeGroupList);
+
+            angular.forEach(attributeGroupList, function(attributeGroup) {
+                    var filesUnderGroup = table.allFiles.filter(function(file) {
+                        return file[attribute] === attributeGroup;
+                    });
+                    goupedFileList[attributeGroup] = filesUnderGroup;
+            });
+
+            console.log(goupedFileList);
         }
     }
 
