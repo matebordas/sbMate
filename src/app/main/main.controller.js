@@ -55,6 +55,7 @@
           }];
 
 
+      var tableApi = null;
 
       vm.dtOptions = DTOptionsBuilder
           //.fromSource(          )
@@ -63,23 +64,18 @@
               bottom: true
           })
           .withOption('bFilter', false)
+          .withOption('order', [[ 0, 'asc' ]])
           .withOption('bLengthChange', false)
-          .withOption('columnDefs', [
-              { "visible": true, "targets": 2 }
-          ])
-          .withOption('order', [[ 2, 'asc' ]])
           .withOption("fnDrawCallback",
                 function ( settings ) {
-                    var api = this.api();
-                    console.log("API" + api);
-
-                    var rows = api.rows( {page:'current'} ).nodes();
+                    tableApi = this.api();
+                    var rows = tableApi.rows( {page:'current'} ).nodes();
                     var last = null;
 
-                    api.column(2, {page:'current'} ).data().each( function ( group, i ) {
+                    tableApi.column(2, {page:'current'} ).data().each( function ( group, i ) {
                       if ( last !== group ) {
                           $(rows).eq( i ).before(
-                              '<tr class="group"><td colspan="4">'+group+'</td></tr>'
+                              '<tr class="group trGroup"><td id="tdGroup" colspan="4">'+group+'</td></tr>'
                           );
                           last = group;
                       }
@@ -109,13 +105,24 @@
           DTColumnBuilder.newColumn('filename').withTitle('filename')
       ];
 
-    /*  $scope.$on('event:dataTableLoaded', function(event, loadedDT) {
-          loadedDT.dt.rowGrouping({
-              iGroupingColumnIndex:1,
-              sGroupingColumnSortDirection: "asc",
-              iGroupingOrderByColumnIndex: 0
-          });
-      });*/
+     vm.groupByFirstColumn = function() {
+         $('.trGroup').remove();
+         vm.dtOptions.fnDrawCallback = function ( settings ) {
+                 var rows = tableApi.rows( {page:'current'} ).nodes();
+                 var last = null;
+
+                 tableApi.column(0, {page:'current'} ).data().each( function ( group, i ) {
+                     if ( last !== group ) {
+                         $(rows).eq( i ).before(
+                             '<tr class="group trGroup"><td id="tdGroup" colspan="4">'+group+'</td></tr>'
+                         );
+                         last = group;
+                     }
+                 });
+             };
+
+         vm.dtOptions.fnDrawCallback();
+      };
 
     }
 })();

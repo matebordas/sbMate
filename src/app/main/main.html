@@ -7,11 +7,13 @@
    <!-- <file-table></file-table>
 -->
     <table id="fileListTable"
-           datatable
+           datatable="datatable"
            dt-options="mainCtrl.dtOptions"
            dt-columns="mainCtrl.dtColumns"
            class="table table-striped table-bordered display">
        </table>
+
+    <button ng-click="mainCtrl.groupByFirstColumn()">Group</button>
 
    <!-- <table datatable="" class="row-border hover">
         <thead>
