@@ -9,7 +9,7 @@
         .service('tableService', tableService);
 
     /** @ngInject */
-    function tableService() {
+    function tableService(arrayUtil) {
         var stepSize = 20;
 
         this.getNumberOfPages = getNumberOfPages;
@@ -117,50 +117,18 @@
 
                 table.sortedBy = attribute;
                 table.sortOrder = "asc";
-                ascSortList(table.allFiles, attribute);
+                arrayUtil.ascSortList(table.allFiles, attribute);
 
             } else if(table.sortedBy === attribute) {
 
                 if (table.sortOrder === "asc") {
                     table.sortOrder = "desc";
-                    descSortList(table.allFiles, attribute);
+                    arrayUtil.descSortList(table.allFiles, attribute);
                 } else {
                     table.sortOrder = "asc";
-                    ascSortList(table.allFiles, attribute);
+                    arrayUtil.ascSortList(table.allFiles, attribute);
                 }
             }
-        }
-
-        function ascSortList(list, attribute) {
-            list.sort(function(a, b) {
-                if(isNaN(a[attribute]) && isNaN(b[attribute])) {
-                    if (a[attribute].toLowerCase() < b[attribute].toLowerCase()) {
-                        return -1;
-                    }
-                    if (a[attribute].toLowerCase() > b[attribute].toLowerCase()) {
-                        return 1;
-                    }
-                    return 0;
-                } else {
-                    return a[attribute] - b[attribute];
-                }
-            });
-        }
-
-        function descSortList(list, attribute) {
-            list.sort(function(a, b) {
-                if(isNaN(a[attribute]) && isNaN(b[attribute])) {
-                    if (b[attribute].toLowerCase() < a[attribute].toLowerCase()) {
-                        return -1;
-                    }
-                    if (b[attribute].toLowerCase() > a[attribute].toLowerCase()) {
-                        return 1;
-                    }
-                    return 0;
-                } else {
-                    return b[attribute] - a[attribute];
-                }
-            });
         }
     }
 

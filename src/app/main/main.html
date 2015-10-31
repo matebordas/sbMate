@@ -8,10 +8,29 @@
         <h1>Loading data...</h1>
     </div>
 
-    <header>
-        <p class="currentPage" ng-hide="mainCtrl.table.filteredFiles.length === 0">
+    <header id="tableHeader" ng-hide="mainCtrl.table.filteredFiles.length === 0">
+        <span class="currentPage">
             Page {{mainCtrl.table.currentPage}} out of {{mainCtrl.table.pagesArray.length}}
-        </p>
+        </span>
+
+        <div class="dropdown dropdownDiv">
+            <strong>Group by: </strong>
+            <button class="btn btn-default dropdown-toggle"
+                    id="groupDropDown"
+                    type="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                Select Grouping
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="groupDropDown">
+                <li><a href="#/">File Name</a></li>
+                <li><a href="#/">Type</a></li>
+                <li><a href="#/">Date</a></li>
+                <li><a href="#/">Size</a></li>
+            </ul>
+        </div>
     </header>
 
     <table  id="fileTable"
