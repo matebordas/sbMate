@@ -9,3 +9,30 @@
     color: black;
   }
 }
+
+#tableNav {
+  #jumpToPageForm {
+    text-align: center;
+  }
+
+  .disabledItem {
+    background: #ffffff;
+  }
+
+  .pagination {
+
+    .disabledLink {
+      color: #AAAAAA;
+      cursor: default;
+      pointer-events: none;
+      text-decoration: none;
+    }
+
+   .selectedLink {
+      color: #fff;
+      cursor: default;
+      background-color: #337ab7;
+      border-color: #337ab7;
+    }
+  }
+}

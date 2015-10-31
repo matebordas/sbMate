@@ -14,6 +14,7 @@
           filteredFiles: [],
           currentPage : null,
           pagesArray : null,
+          visiblePagesArray: null,
           sortedBy: null,
           sortOrder: null
       };

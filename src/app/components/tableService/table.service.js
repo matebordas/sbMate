@@ -54,6 +54,19 @@
                 table.currentPage = pageNumber;
                 table.filteredFiles = filterDataByPage(pageNumber, table.allFiles);
             }
+
+            table.visiblePagesArray = [];
+            var startIndex = 0;
+
+            if((pageNumber + 4) <= table.pagesArray.length) {
+                startIndex = pageNumber > 1 ? pageNumber -1 : 1;
+            } else {
+                startIndex = table.pagesArray.length - 4;
+            }
+
+            for (var i = startIndex; i <= (startIndex + 4); i++) {
+                table.visiblePagesArray.push(i);
+            }
         }
 
         function updateTableWithNewDataSet(table, newDataSet) {

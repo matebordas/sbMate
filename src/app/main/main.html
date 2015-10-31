@@ -1,5 +1,5 @@
 <header id="mainHeader">
-    <h1>Seven Bridges App</h1>
+    <h1>File List App</h1>
 </header>
 
 <div class="container">
@@ -7,6 +7,12 @@
     <div class="jumbotron" ng-show="mainCtrl.table.filteredFiles.length === 0">
         <h1>Loading data...</h1>
     </div>
+
+    <header>
+        <p class="currentPage" ng-hide="mainCtrl.table.filteredFiles.length === 0">
+            Page {{mainCtrl.table.currentPage}} out of {{mainCtrl.table.pagesArray.length}}
+        </p>
+    </header>
 
     <table  id="fileTable"
             ng-hide="mainCtrl.table.filteredFiles.length === 0"
@@ -80,38 +86,60 @@
         </tbody>
     </table>
 
-    <nav ng-hide="mainCtrl.table.filteredFiles.length === 0">
+    <nav id="tableNav" ng-hide="mainCtrl.table.filteredFiles.length === 0">
 
-        <!--
-         <td>{{mainCtrl.getIndexOfItem(mainCtrl.table.allFiles, file) + 1}}</td>
-        -->
+        <p class="currentPage">Page {{mainCtrl.table.currentPage}} out of {{mainCtrl.table.pagesArray.length}}</p>
 
-       <!-- <ul class="pagination">
+        <ul class="pagination">
             <li>
-                <a href="#/" aria-label="Previous" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage - 1)">
+                <a href="#/" aria-label="Previous"
+                   ng-class="{'disabledLink' : mainCtrl.table.currentPage === 1}"
+                   ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage - 1)">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li ng-repeat="page in mainCtrl.table.pagesArray track by $index">
-                <a href="#/" ng-click="mainCtrl.chnageTablePage($index + 1)">{{$index + 1}}</a>
-            </li>
-            <li>
-                <a href="#/" aria-label="Next" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage + 1)">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>-->
 
-        <span id="currentPage">Page {{mainCtrl.table.currentPage}} out of {{mainCtrl.table.pagesArray.length}}</span>
-        <ul class="pager">
-            <li>
-                <a href="#/" aria-label="Next" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage - 1)">
-                    Previous
+
+            <!--Fist Page-->
+            <li ng-show="mainCtrl.table.currentPage > 2">
+                <a href="#/"
+                   ng-click="mainCtrl.chnageTablePage(1)">
+                    1
                 </a>
             </li>
+            <li ng-show="mainCtrl.table.currentPage > 2">
+                <a class="disabledItem">
+                ...
+                </a>
+            </li>
+
+
+            <!--Pages In the Middle-->
+            <li ng-repeat="page in mainCtrl.table.visiblePagesArray track by $index">
+                <a href="#/"
+                   ng-class="{'selectedLink' : mainCtrl.table.currentPage === page}"
+                   ng-click="mainCtrl.chnageTablePage(page)">{{page}}</a>
+            </li>
+
+
+            <!--Last Page-->
+            <li ng-show="mainCtrl.table.currentPage < mainCtrl.table.pagesArray.length - 1">
+                <a class="disabledItem">
+                    ...
+                </a>
+            </li>
+            <li ng-show="mainCtrl.table.currentPage < mainCtrl.table.pagesArray.length - 1">
+                <a href="#/" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.pagesArray.length)">
+                    {{mainCtrl.table.pagesArray.length}}
+                </a>
+            </li>
+
             <li>
-                <a href="#/" aria-label="Next" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage + 1)">
-                    Next
+                <a href="#/"
+                   aria-label="Next"
+                   ng-class="{'disabledLink' : mainCtrl.table.currentPage === mainCtrl.table.pagesArray.length}"
+                   ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage + 1)">
+                    <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
         </ul>
