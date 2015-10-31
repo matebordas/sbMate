@@ -9,12 +9,12 @@
         .service('tableService', tableService);
 
     /** @ngInject */
-    function tableService($log) {
+    function tableService() {
         var stepSize = 20;
 
         this.getNumberOfPages = getNumberOfPages;
         this.filterDataByPage = filterDataByPage;
-        this.getIndexOfUser = getIndexOfUser;
+        this.getIndexOfItem = getIndexOfItem;
         this.chnageTablePage = chnageTablePage;
         this.updateTableWithNewDataSet = updateTableWithNewDataSet;
 
@@ -30,11 +30,10 @@
                 var startIndex = (pageNumber - 1) * stepSize;
                 var endIndex = (pageNumber * stepSize);
 
-                $log.log(startIndex, endIndex);
                 return dataToFilter.slice(startIndex, endIndex);
         }
 
-        function getIndexOfUser(arrayList, itemToFind) {
+        function getIndexOfItem(arrayList, itemToFind) {
             for(var i = 0; i < arrayList.length; i++) {
                 var item = arrayList[i];
 
@@ -52,18 +51,16 @@
         function chnageTablePage(table, pageNumber) {
             if(pageNumber !== null && pageNumber > 0 && pageNumber <= table.pagesArray.length) {
                 table.currentPage = pageNumber;
-                table.filteredUsers = filterDataByPage(pageNumber, table.allUsers);
+                table.filteredFiles = filterDataByPage(pageNumber, table.allFiles);
             }
         }
 
         function updateTableWithNewDataSet(table, newDataSet) {
-            $log.log(newDataSet);
-
-            table.allUsers = newDataSet;
-            var numberOfPages = getNumberOfPages(table.allUsers);
+            table.allFiles = newDataSet;
+            var numberOfPages = getNumberOfPages(table.allFiles);
             table.pagesArray = new Array(numberOfPages);
 
-            if (table.allUsers.length > 0) {
+            if (table.allFiles.length > 0) {
                 if(table.currentPage === null) {
                     chnageTablePage(table, 1);
                 } else {
@@ -75,7 +72,7 @@
                /*If we got an empty array then reset the values*/
             } else {
                 table.currentPage = null;
-                table.filteredUsers = [];
+                table.filteredFiles = [];
             }
         }
     }
