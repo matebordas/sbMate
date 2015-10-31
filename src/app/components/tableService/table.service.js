@@ -97,6 +97,7 @@
 
             if(!isGrouped) {
                 sortFilesBy(table, "filename");
+                table.initialFilesList = table.allFiles;
             }
         }
 

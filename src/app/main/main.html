@@ -112,7 +112,9 @@
                 </td>
 
                 <td ng-show="!file.isGroup">
-                    <input type="checkbox" ng-click="mainCtrl.toggleFileSelect(file)">
+                    <input type="checkbox"
+                           ng-checked="file.selected"
+                           ng-click="mainCtrl.toggleFileSelect(file)">
                 </td>
 
                 <td ng-show="!file.isGroup">{{file.filename}}</td>

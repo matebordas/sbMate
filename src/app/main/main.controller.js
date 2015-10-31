@@ -10,6 +10,7 @@
       var vm = this;
 
       vm.table = {
+          initialFilesList: [],
           allFiles: [],
           filteredFiles: [],
           currentPage : null,
@@ -38,9 +39,11 @@
       };
 
       vm.groupByAttribute = function(attribute) {
-          vm.table.groupedBy = attribute;
-
           if(attribute !== '') {
+              /*We need to reset the table data before grouping*/
+              tableService.updateTableWithNewDataSet(vm.table, vm.table.initialFilesList, false)
+
+              vm.table.groupedBy = attribute;
               tableService.groupByAttribute(vm.table, attribute);
           } else {
               vm.table.groupedBy = null;
