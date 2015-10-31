@@ -114,7 +114,7 @@
 
                 <td ng-show="file.isGroup"
                     class="groupTd"
-                    colspan="5">
+                    colspan="6">
                     <strong>{{file[mainCtrl.table.groupedBy]}}</strong>
                 </td>
 
@@ -129,7 +129,7 @@
                 <td ng-show="!file.isGroup">{{file.date}}</td>
                 <td ng-show="!file.isGroup">{{file.size}}</td>
 
-                <td>
+                <td ng-show="!file.isGroup">
                      <a href="#/" title="Edit"
                         class="actionButton glyphicon glyphicon-edit"
                         data-toggle="modal"
@@ -137,9 +137,15 @@
                         ng-click="mainCtrl.selectFile(file)"
                         aria-hidden="true">
                     </a>
-                    <a href="#/" title="Delete" class="actionButton glyphicon glyphicon-remove"
-                           aria-hidden="true">
+
+                    <a href="#/" title="Delete"
+                       class="actionButton glyphicon glyphicon-remove"
+                       data-toggle="modal"
+                       data-target="#deleteModal"
+                       ng-click="mainCtrl.selectFile(file)"
+                       aria-hidden="true">
                     </a>
+
                     <a href="#/" title="Display MetaData" class="actionButton glyphicon glyphicon-info-sign"
                        aria-hidden="true">
                     </a>
@@ -262,6 +268,37 @@
                         data-dismiss="modal"
                         class="btn btn-primary"
                         ng-click="mainCtrl.saveChanges()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="deleteModalHead">Delete File</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this file?
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal">
+                   No
+                </button>
+                <button type="button"
+                        data-dismiss="modal"
+                        class="btn btn-success"
+                        ng-click="mainCtrl.deleteFile()">Yes</button>
             </div>
         </div>
     </div>

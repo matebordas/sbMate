@@ -74,7 +74,7 @@
         }
 
 
-        function updateTableWithNewDataSet(table, newDataSet, isGrouped) {
+        function updateTableWithNewDataSet(table, newDataSet, isGrouped, skipSort) {
             table.allFiles = newDataSet
 
             var numberOfPages = getNumberOfPages(table.allFiles);
@@ -95,7 +95,7 @@
                 table.filteredFiles = [];
             }
 
-            if(!isGrouped) {
+            if(!isGrouped && !skipSort) {
                 sortFilesBy(table, "filename");
                 table.initialFilesList = table.allFiles;
             }

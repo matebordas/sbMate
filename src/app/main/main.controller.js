@@ -89,6 +89,12 @@
       };
 
 
+      vm.deleteFile = function() {
+          vm.table.filteredFiles.splice(initialFileIndex, 1);
+          vm.table.allFiles.splice(initialFileIndex, 1);
+          tableService.updateTableWithNewDataSet(vm.table, vm.table.allFiles, false, true)
+      };
+
       updateTableWithNewDataSet();
 
       function updateTableWithNewDataSet() {
