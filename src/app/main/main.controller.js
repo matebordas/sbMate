@@ -6,21 +6,18 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($q, $scope, webDevTec, DTOptionsBuilder, DTColumnBuilder) {
+  function MainController(fileListService) {
     var vm = this;
 
-   /* vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1445898612341;
-    vm.showToastr = showToastr;*/
 
-      var getTableData = function() {
+
+    /*  var getTableData = function() {
           var deferred = $q.defer();
           deferred.resolve(data);
          return deferred.promise;
-      };
+      };*/
 
-      var data = [
+      vm.fileList = [
               {
                   "date":"2012-10-13",
                   "size":52802455,
@@ -48,79 +45,109 @@
                   "filename":"labore minim.ppt"
               },
           {
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },{
+              "date":"2012-10-13",
+              "size":52802455,
+              "type":"pdf",
+              "filename":"labore minim.ppt"
+          },
+          {
               "date": "2012-12-16",
               "size": 87726956,
               "type": "ppt",
               "filename": "esse cupidatat.xls"
           }];
 
+      vm.filteredFiles = [];
+      vm.allFiles = [];
 
-      var tableApi = null;
-
-      vm.dtOptions = DTOptionsBuilder
-          //.fromSource(          )
-          .fromFnPromise(getTableData())
-          .withFixedHeader({
-              bottom: true
-          })
-          .withOption('bFilter', false)
-          .withOption('order', [[ 0, 'asc' ]])
-          .withOption('bLengthChange', false)
-         /* .withOption("fnDrawCallback",
-                function ( settings ) {
-                    tableApi = this.api();
-                    var rows = tableApi.rows( {page:'current'} ).nodes();
-                    var last = null;
-
-                    tableApi.column(2, {page:'current'} ).data().each( function ( group, i ) {
-                      if ( last !== group ) {
-                          $(rows).eq( i ).before(
-                              '<tr class="group trGroup"><td id="tdGroup" colspan="4">'+group+'</td></tr>'
-                          );
-                          last = group;
-                      }
-                    });
-                })*/
-          .withDisplayLength(20)
-          .withSelect({
-              style:    'os',
-              selector: 'td:first-child'
-          })
-          .withBootstrap();
-
-      var table = $('#fileListTable');
-      console.log(table);
-
-      vm.dtColumns = [
-          DTColumnBuilder.newColumn(null).withTitle('')
-              .notSortable()
-              .withClass('select-checkbox')
-              // Need to define the mRender function, otherwise we get a [Object Object]
-              .renderWith(function() {return '';}),
-          DTColumnBuilder.newColumn('date').withTitle('date'),
-          DTColumnBuilder.newColumn('size').withTitle('size'),
-          DTColumnBuilder.newColumn('type').withTitle('type'),
-          DTColumnBuilder.newColumn('filename').withTitle('filename')
-      ];
-
-     vm.groupByFirstColumn = function() {
-         $('.trGroup').remove();
-         vm.dtOptions.fnDrawCallback = function ( settings ) {
-                 var rows = tableApi.rows( {page:'current'} ).nodes();
-                 var last = null;
-
-                 tableApi.column(0, {page:'current'} ).data().each( function ( group, i ) {
-                     if ( last !== group ) {
-                         $(rows).eq( i ).before(
-                             '<tr class="group trGroup"><td id="tdGroup" colspan="4">'+group+'</td></tr>'
-                         );
-                         last = group;
-                     }
-                 });
-             };
-
-         vm.dtOptions.fnDrawCallback();
+      vm.table = {
+          allFiles: [],
+          filteredFiles: [],
+          currentPage : null,
+          pagesArray : null
       };
+
+   /*   vm.chnageTablePage = function(pageNumber) {
+          tableService.chnageTablePage(vm.table, pageNumber);
+      };
+
+      vm.getIndexOfFile = function(arrayList, itemToFind) {
+          return tableService.getIndexOfUser(arrayList, itemToFind);
+      };*/
+
+
+      fileListService.getListOfFiles().then(function (data) {
+         // tableService.updateTableWithNewDataSet(vm.table, data);
+          console.log(data.length);
+          console.log(data[0]);
+      }, function (reason) {
+          $log.error('Failed: ' + reason);
+      });
 
     }
 })();
