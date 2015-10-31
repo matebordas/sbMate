@@ -66,7 +66,7 @@
           .withOption('bFilter', false)
           .withOption('order', [[ 0, 'asc' ]])
           .withOption('bLengthChange', false)
-          .withOption("fnDrawCallback",
+         /* .withOption("fnDrawCallback",
                 function ( settings ) {
                     tableApi = this.api();
                     var rows = tableApi.rows( {page:'current'} ).nodes();
@@ -80,25 +80,23 @@
                           last = group;
                       }
                     });
-                })
+                })*/
           .withDisplayLength(20)
+          .withSelect({
+              style:    'os',
+              selector: 'td:first-child'
+          })
           .withBootstrap();
 
       var table = $('#fileListTable');
       console.log(table);
 
-    /*  vm.dtOptions = {
-          data: data,
-          bFilter: false,
-          bLengthChange: false,
-          iDisplayLength: 20,
-          fixedHeader: true
-      };*/
-
-     /* vm.dtOptions = DTOptionsBuilder
-          .withBootstrap();*/
-
       vm.dtColumns = [
+          DTColumnBuilder.newColumn(null).withTitle('')
+              .notSortable()
+              .withClass('select-checkbox')
+              // Need to define the mRender function, otherwise we get a [Object Object]
+              .renderWith(function() {return '';}),
           DTColumnBuilder.newColumn('date').withTitle('date'),
           DTColumnBuilder.newColumn('size').withTitle('size'),
           DTColumnBuilder.newColumn('type').withTitle('type'),
