@@ -25,7 +25,7 @@
             }).then(function successCallback(response) {
                     deferred.resolve(response.data);
                 }, function errorCallback(response) {
-                    deferred.reject;
+                    deferred.reject(response);
                 });
 
             return deferred.promise;

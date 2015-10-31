@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(fileListService, tableService, $timeout) {
+  function MainController($log, fileListService, tableService, $timeout) {
       var vm = this;
 
       vm.table = {
@@ -52,19 +52,19 @@
           switch(vm.table.groupedBy) {
               case "filename":
                   return "File Name";
-                  break;
               case "type":
                   return "Type";
-                  break;
               case "date":
                   return "Date";
-                  break;
               case "size":
                   return "Size";
-                  break
               default:
                   return "No Grouping";
           }
+      };
+
+      vm.toggleFileSelect = function(file) {
+          file.selected = file.selected ? false : true;
       };
 
       updateTableWithNewDataSet();
@@ -72,7 +72,7 @@
       function updateTableWithNewDataSet() {
           fileListService.getListOfFiles().then(function (data) {
               $timeout(tableService.updateTableWithNewDataSet(vm.table, data, false), 0);  //Put this in the event queue with timeout
-              console.log(data.length);
+              $log.log(data.length);
           }, function (reason) {
               $log.error('Failed: ' + reason);
           });

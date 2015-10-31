@@ -100,27 +100,7 @@
             }
         }
 
-
         function sortFilesBy(table, attribute) {
-            switch(attribute) {
-                case "filename":
-                        sortByAttribute(table, "filename");
-                    break;
-                case "type":
-                        sortByAttribute(table, "type");
-                    break;
-                case "date":
-                        sortByAttribute(table, "date");
-                    break;
-                case "size":
-                        sortByAttribute(table, "size");
-                    break;
-            }
-            chnageTablePage(table, 1);
-        }
-
-
-        function sortByAttribute(table, attribute) {
             if(table.sortedBy !== attribute) {
 
                 table.sortedBy = attribute;
@@ -137,6 +117,8 @@
                     arrayUtil.ascSortList(table.allFiles, attribute);
                 }
             }
+
+            chnageTablePage(table, 1);
         }
 
         function groupByAttribute(table, attribute) {
