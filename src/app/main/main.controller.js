@@ -39,7 +39,13 @@
 
       vm.groupByAttribute = function(attribute) {
           vm.table.groupedBy = attribute;
-          tableService.groupByAttribute(vm.table, attribute);
+
+          if(attribute !== '') {
+              tableService.groupByAttribute(vm.table, attribute);
+          } else {
+              vm.table.groupedBy = null;
+              updateTableWithNewDataSet();
+          }
       };
 
       vm.getGroupByText = function() {
@@ -61,11 +67,15 @@
           }
       };
 
-      fileListService.getListOfFiles().then(function (data) {
-          $timeout(tableService.updateTableWithNewDataSet(vm.table, data), 0);  //Put this in the event queue with timeout
-          console.log(data.length);
-      }, function (reason) {
-          $log.error('Failed: ' + reason);
-      });
+      updateTableWithNewDataSet();
+
+      function updateTableWithNewDataSet() {
+          fileListService.getListOfFiles().then(function (data) {
+              $timeout(tableService.updateTableWithNewDataSet(vm.table, data, false), 0);  //Put this in the event queue with timeout
+              console.log(data.length);
+          }, function (reason) {
+              $log.error('Failed: ' + reason);
+          });
+      }
     }
 })();

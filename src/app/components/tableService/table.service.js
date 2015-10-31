@@ -74,7 +74,7 @@
         }
 
 
-        function updateTableWithNewDataSet(table, newDataSet) {
+        function updateTableWithNewDataSet(table, newDataSet, isGrouped) {
             table.allFiles = newDataSet
 
             var numberOfPages = getNumberOfPages(table.allFiles);
@@ -94,7 +94,10 @@
                 table.currentPage = null;
                 table.filteredFiles = [];
             }
-            sortFilesBy(table, "filename");
+
+            if(!isGrouped) {
+                sortFilesBy(table, "filename");
+            }
         }
 
 
@@ -137,7 +140,7 @@
         }
 
         function groupByAttribute(table, attribute) {
-            var goupedFileList = {};
+            var goupedFileList = [];
             var allAttributesList = [];
 
             angular.forEach(table.allFiles, function(file) {
@@ -147,13 +150,20 @@
             var attributeGroupList = arrayUtil.filterUniqueItems(allAttributesList);
 
             angular.forEach(attributeGroupList, function(attributeGroup) {
-                    var filesUnderGroup = table.allFiles.filter(function(file) {
+                   var filesUnderGroup = table.allFiles.filter(function(file) {
                         return file[attribute] === attributeGroup;
                     });
-                    goupedFileList[attributeGroup] = filesUnderGroup;
+
+                var groupObject = {};
+                groupObject[attribute] = attributeGroup;
+                groupObject['isGroup'] = true;
+
+                goupedFileList.push(groupObject);
+
+                goupedFileList = goupedFileList.concat(filesUnderGroup);
             });
 
-            console.log(goupedFileList);
+            updateTableWithNewDataSet(table, goupedFileList, true);
         }
     }
 
