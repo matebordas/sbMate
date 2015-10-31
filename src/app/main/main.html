@@ -25,10 +25,10 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="groupDropDown">
-                <li><a href="#/">File Name</a></li>
-                <li><a href="#/">Type</a></li>
-                <li><a href="#/">Date</a></li>
-                <li><a href="#/">Size</a></li>
+                <li><a href="#/" ng-click="mainCtrl.groupByAttribute('filename')">File Name</a></li>
+                <li><a href="#/" ng-click="mainCtrl.groupByAttribute('type')">Type</a></li>
+                <li><a href="#/" ng-click="mainCtrl.groupByAttribute('date')">Date</a></li>
+                <li><a href="#/" ng-click="mainCtrl.groupByAttribute('size')">Size</a></li>
             </ul>
         </div>
     </header>

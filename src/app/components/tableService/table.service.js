@@ -18,6 +18,7 @@
         this.chnageTablePage = chnageTablePage;
         this.updateTableWithNewDataSet = updateTableWithNewDataSet;
         this.sortFilesBy = sortFilesBy;
+        this.groupByAttribute = groupByAttribute;
 
         function getNumberOfPages(dataSet) {
             var pagesNumber = parseInt(dataSet.length / stepSize);
@@ -27,12 +28,14 @@
             return pagesNumber;
         }
 
+
         function filterDataByPage(pageNumber, dataToFilter) {
                 var startIndex = (pageNumber - 1) * stepSize;
                 var endIndex = (pageNumber * stepSize);
 
                 return dataToFilter.slice(startIndex, endIndex);
         }
+
 
         function getIndexOfItem(arrayList, itemToFind) {
             for(var i = 0; i < arrayList.length; i++) {
@@ -48,6 +51,7 @@
             }
             return -1;
         }
+
 
         function chnageTablePage(table, pageNumber) {
             if(pageNumber !== null && pageNumber > 0 && pageNumber <= table.pagesArray.length) {
@@ -69,6 +73,7 @@
             }
         }
 
+
         function updateTableWithNewDataSet(table, newDataSet) {
             table.allFiles = newDataSet
 
@@ -89,9 +94,9 @@
                 table.currentPage = null;
                 table.filteredFiles = [];
             }
-
             sortFilesBy(table, "filename");
         }
+
 
         function sortFilesBy(table, attribute) {
             switch(attribute) {
@@ -119,7 +124,7 @@
                 table.sortOrder = "asc";
                 arrayUtil.ascSortList(table.allFiles, attribute);
 
-            } else if(table.sortedBy === attribute) {
+            } else if(table.sortedBy === attribute) { //If already sorted by this attribute, then revert the list
 
                 if (table.sortOrder === "asc") {
                     table.sortOrder = "desc";
@@ -129,6 +134,18 @@
                     arrayUtil.ascSortList(table.allFiles, attribute);
                 }
             }
+        }
+
+        function groupByAttribute(table, attribute) {
+            var attributeGroupList = [];
+            var allAttributesList = [];
+
+            angular.forEach(table.allFiles, function(file) {
+                this.push(file[attribute]);
+            }, allAttributesList);
+
+            var attributeGroupList = arrayUtil.filterUniqueItems(allAttributesList);
+            console.log(attributeGroupList);
         }
     }
 

@@ -10,6 +10,7 @@
 
         this.ascSortList = ascSortList;
         this.descSortList = descSortList;
+        this.filterUniqueItems = filterUniqueItems;
 
         function ascSortList(list, attribute) {
             list.sort(function(a, b) {
@@ -40,6 +41,21 @@
                 } else {
                     return b[attribute] - a[attribute];
                 }
+            });
+        }
+
+        /*
+        * Remove duplicates, it uses hash lookups for primitives and linear search for objects
+        * */
+        function filterUniqueItems(a) {
+            var prims = {"boolean":{}, "number":{}, "string":{}}, objs = [];
+
+            return a.filter(function(item) {
+                var type = typeof item;
+                if(type in prims)
+                    return prims[type].hasOwnProperty(item) ? false : (prims[type][item] = true);
+                else
+                    return objs.indexOf(item) >= 0 ? false : objs.push(item);
             });
         }
     }

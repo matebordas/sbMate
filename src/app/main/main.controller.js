@@ -42,5 +42,9 @@
       }, function (reason) {
           $log.error('Failed: ' + reason);
       });
+
+      vm.groupByAttribute = function(attribute) {
+          tableService.groupByAttribute(vm.table, attribute);
+      }
     }
 })();
