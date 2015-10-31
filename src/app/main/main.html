@@ -15,17 +15,37 @@
 
         <thead class="fixedHeader">
             <tr>
-                <th>Index</th>
-                <th>File Name</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Size</th>
+                <th>
+                    Index
+                </th>
+
+                <th>File Name
+                    <a href="#/" ng-click="">
+                        <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                        </span>
+                    </a>
+                </th>
+
+                <th>Type
+                     <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                    </span>
+                </th>
+
+                <th>Date
+                     <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                    </span>
+                </th>
+
+                <th>Size
+                     <span class="glyphicon glyphicon glyphicon-sort glyphicon-align-left" aria-hidden="true">
+                    </span>
+                </th>
             </tr>
         </thead>
 
         <tbody>
             <tr ng-repeat="file in mainCtrl.table.filteredFiles track by $index">
-                <td>{{mainCtrl.getIndexOfItem(mainCtrl.table.allFiles, file) + 1}}</td>
+                <td> <input type="checkbox"> </td>
                 <td>{{file.filename}}</td>
                 <td>{{file.type}}</td>
                 <td>{{file.date}}</td>
@@ -35,6 +55,11 @@
     </table>
 
     <nav ng-hide="mainCtrl.table.filteredFiles.length === 0">
+
+        <!--
+         <td>{{mainCtrl.getIndexOfItem(mainCtrl.table.allFiles, file) + 1}}</td>
+        -->
+
        <!-- <ul class="pagination">
             <li>
                 <a href="#/" aria-label="Previous" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.currentPage - 1)">

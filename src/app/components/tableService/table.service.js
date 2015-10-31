@@ -56,7 +56,8 @@
         }
 
         function updateTableWithNewDataSet(table, newDataSet) {
-            table.allFiles = newDataSet;
+            table.allFiles = newDataSet
+
             var numberOfPages = getNumberOfPages(table.allFiles);
             table.pagesArray = new Array(numberOfPages);
 
@@ -74,6 +75,71 @@
                 table.currentPage = null;
                 table.filteredFiles = [];
             }
+
+            sortFilesBy(table, "filename");
+        }
+
+        function sortFilesBy(table, attribute) {
+            switch(attribute) {
+                case "filename":
+                        sortByAttribute(table, "filename");
+                    break;
+                case "type":
+                        sortByAttribute(table, "type");
+                    break;
+                case "date":
+                        sortByAttribute(table, "date");
+                    break;
+                case "size":
+                        sortByAttribute(table, "size");
+                    break;
+            }
+            chnageTablePage(table, 1);
+        }
+
+
+        function sortByAttribute(table, attribute) {
+            if(table.sortedBy !== attribute) {
+
+                table.sortedBy = attribute;
+                table.sortOrder = "asc"
+                ascSortList(table.allFiles, attribute);
+
+            } else if(table.sortedBy === attribute) {
+
+                if (table.sortOrder === "asc") {
+                    table.sortOrder = "desc";
+                    descSortList(table.allFiles, attribute);
+                } else {
+                    table.sortOrder = "asc";
+                    ascSortList(table.allFiles, attribute);
+                }
+            }
+        }
+
+        function ascSortList(list, attribute) {
+            list.sort(function(a, b) {
+                if (a[attribute].toLowerCase() < b[attribute].toLowerCase()) {
+                    return -1;
+                }
+                if (a[attribute].toLowerCase() > b[attribute].toLowerCase()) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+
+
+        function descSortList(list, attribute) {
+            list.sort(function(a, b) {
+                if (b[attribute].toLowerCase() < a[attribute].toLowerCase()) {
+                    return -1;
+                }
+                if (b[attribute].toLowerCase() > a[attribute].toLowerCase()) {
+                    return 1;
+                }
+                return 0;
+            });
         }
     }
 

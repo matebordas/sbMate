@@ -13,7 +13,9 @@
           allFiles: [],
           filteredFiles: [],
           currentPage : null,
-          pagesArray : null
+          pagesArray : null,
+          sortedBy: null,
+          sortOrder: null
       };
 
       vm.chnageTablePage = function(pageNumber) {
@@ -24,17 +26,20 @@
           return tableService.getIndexOfItem(arrayList, itemToFind);
       };
 
+      vm.floatTheadOptions = {
+          top: 0,
+          position: 'absolute'
+      };
+
+      /*vm.sortBy = function(attribute) {
+
+      };*/
+
       fileListService.getListOfFiles().then(function (data) {
           $timeout(tableService.updateTableWithNewDataSet(vm.table, data), 0);  //Put this in the event queue with timeout
           console.log(data.length);
       }, function (reason) {
           $log.error('Failed: ' + reason);
       });
-
-      vm.floatTheadOptions = {
-          top: 0,
-          position: 'absolute'
-      };
-
     }
 })();
