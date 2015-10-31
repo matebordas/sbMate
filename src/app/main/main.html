@@ -21,10 +21,17 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
-                Select Grouping
+               {{mainCtrl.getGroupByText()}}
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="groupDropDown">
+                <li>
+                    <a class="noGrouping"
+                       ng-click="mainCtrl.table.groupedBy = null"
+                       href="#/">
+                        No Grouping
+                    </a>
+                </li>
                 <li><a href="#/" ng-click="mainCtrl.groupByAttribute('filename')">File Name</a></li>
                 <li><a href="#/" ng-click="mainCtrl.groupByAttribute('type')">Type</a></li>
                 <li><a href="#/" ng-click="mainCtrl.groupByAttribute('date')">Date</a></li>
@@ -95,6 +102,9 @@
         </thead>
 
         <tbody>
+        <tr>
+            <td colspan="5">Group</td>
+        </tr>
             <tr ng-repeat="file in mainCtrl.table.filteredFiles track by $index">
                 <td> <input type="checkbox"> </td>
                 <td>{{file.filename}}</td>

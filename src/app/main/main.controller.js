@@ -16,7 +16,8 @@
           pagesArray : null,
           visiblePagesArray: null,
           sortedBy: null,
-          sortOrder: null
+          sortOrder: null,
+          groupedBy: null
       };
 
       vm.chnageTablePage = function(pageNumber) {
@@ -36,15 +37,35 @@
           tableService.sortFilesBy(vm.table, attribute)
       };
 
+      vm.groupByAttribute = function(attribute) {
+          vm.table.groupedBy = attribute;
+          tableService.groupByAttribute(vm.table, attribute);
+      };
+
+      vm.getGroupByText = function() {
+          switch(vm.table.groupedBy) {
+              case "filename":
+                  return "File Name";
+                  break;
+              case "type":
+                  return "Type";
+                  break;
+              case "date":
+                  return "Date";
+                  break;
+              case "size":
+                  return "Size";
+                  break
+              default:
+                  return "No Grouping";
+          }
+      };
+
       fileListService.getListOfFiles().then(function (data) {
           $timeout(tableService.updateTableWithNewDataSet(vm.table, data), 0);  //Put this in the event queue with timeout
           console.log(data.length);
       }, function (reason) {
           $log.error('Failed: ' + reason);
       });
-
-      vm.groupByAttribute = function(attribute) {
-          tableService.groupByAttribute(vm.table, attribute);
-      }
     }
 })();
