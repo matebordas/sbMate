@@ -86,13 +86,14 @@
       vm.saveChanges = function() {
           vm.table.filteredFiles[initialFileIndex] = vm.selectedFile;
           vm.table.allFiles[initialFileIndex] = vm.selectedFile;
+          tableService.updateTableWithNewDataSet(vm.table, vm.table.allFiles, false, true);
       };
 
 
       vm.deleteFile = function() {
           vm.table.filteredFiles.splice(initialFileIndex, 1);
           vm.table.allFiles.splice(initialFileIndex, 1);
-          tableService.updateTableWithNewDataSet(vm.table, vm.table.allFiles, false, true)
+          tableService.updateTableWithNewDataSet(vm.table, vm.table.allFiles, false, true);
       };
 
       updateTableWithNewDataSet();

@@ -197,12 +197,12 @@
 
 
             <!--Last Page-->
-            <li ng-show="mainCtrl.table.currentPage < mainCtrl.table.pagesArray.length - 4">
+            <li ng-show="mainCtrl.table.currentPage < mainCtrl.table.pagesArray.length - 3">
                 <a class="disabledItem">
                     ...
                 </a>
             </li>
-            <li ng-show="mainCtrl.table.currentPage < mainCtrl.table.pagesArray.length - 4">
+            <li ng-show="mainCtrl.table.currentPage < mainCtrl.table.pagesArray.length - 3">
                 <a href="#/" ng-click="mainCtrl.chnageTablePage(mainCtrl.table.pagesArray.length)">
                     {{mainCtrl.table.pagesArray.length}}
                 </a>
