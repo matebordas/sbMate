@@ -146,7 +146,12 @@
                        aria-hidden="true">
                     </a>
 
-                    <a href="#/" title="Display MetaData" class="actionButton glyphicon glyphicon-info-sign"
+                    <a href="#/" title="Display MetaData"
+                       class="actionButton glyphicon glyphicon-info-sign"
+                       ng-show="file.metadata"
+                       data-toggle="modal"
+                       data-target="#metaModal"
+                       ng-click="mainCtrl.selectFile(file)"
                        aria-hidden="true">
                     </a>
                 </td>
@@ -299,6 +304,36 @@
                         data-dismiss="modal"
                         class="btn btn-success"
                         ng-click="mainCtrl.deleteFile()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Meta-data Modal -->
+<div class="modal fade" id="metaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="metaModalHead">Meta-data</h4>
+            </div>
+            <div class="modal-body">
+                <p><label>Title: </label> {{mainCtrl.selectedFile.metadata.title}}</p>
+                <p><label>Artist: </label> {{mainCtrl.selectedFile.metadata.artist}}</p>
+                <p><label>Album: </label> {{mainCtrl.selectedFile.metadata.album}}</p>
+                <p><label>Year: </label> {{mainCtrl.selectedFile.metadata.year}}</p>
+                <p><label>Genre: </label> {{mainCtrl.selectedFile.metadata.genre}}</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        data-dismiss="modal"
+                        class="btn btn-primary">Ok</button>
             </div>
         </div>
     </div>
